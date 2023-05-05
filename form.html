@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Contoh Aplikasi Web dengan AJAX</title>
+	<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+	<script>
+		$(document).ready(function(){
+			$("#button-fetch-data").click(function(){
+				$.ajax({
+					url: "https://jsonplaceholder.typicode.com/posts",
+					type: "GET",
+					success: function(result){
+						var data = '';
+						$.each(result, function(i, item){
+							data += '<tr>';
+							data += '<td>'+item.id+'</td>';
+							data += '<td>'+item.title+'</td>';
+							data += '<td>'+item.body+'</td>';
+							data += '</tr>';
+						});
+						$("#table-data").html(data);
+					}
+				});
+			});
+		});
+	</script>
+</head>
+<body>
+	<button id="button-fetch-data">Tampilkan Data</button>
+	<table>
+		<thead>
+			<tr>
+				<th>ID</th>
+				<th>Judul</th>
+				<th>Konten</th>
+			</tr>
+		</thead>
+		<tbody id="table-data">
+		</tbody>
+	</table>
+</body>
+</html>
